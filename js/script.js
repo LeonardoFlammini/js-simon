@@ -17,9 +17,14 @@ btn.addEventListener('click', play);
 function play(){
 
 while(i < numRandom){
-  randomArray[i] = randomizer(0,maxRandom);
-  cardArray[i].innerHTML = randomArray[i];
-  i++;
+  const newNum = randomizer(0,maxRandom);
+  
+  if (!randomArray.includes(newNum)){
+    randomArray.push(newNum);
+    cardArray[i].innerHTML = newNum;
+    i++;
+  }
+  
 }
 i = 0;
 
@@ -70,6 +75,11 @@ function askPrompt(){
     i++;
   }
   i = 0;
+
+  
+  answerArray.sort(function(a, b){return a - b});
+  randomArray.sort(function(a, b){return a - b});
+  console.log(answerArray, randomArray);
 
   message = (answerArray.toString() == randomArray.toString()) ? "HAI VINTO" : "HAI PERSO" ;
   out.innerHTML = message;
